@@ -17,4 +17,4 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = HelloWorldBot(intents=intents)
-client.run('ODUzODgxNjQ2Njg4MTA4NTUz.YMb1QA.Wo7oUWXCnUIZfaNuzgfHOE2JL60')
+client.run('<token>')
