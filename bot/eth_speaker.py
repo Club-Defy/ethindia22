@@ -108,4 +108,13 @@ async def list_nfts(ctx, address):
     await ctx.send(embeds=list_erc721(address))
 
 
+@bot.command()
+async def list_my_nfts(ctx):
+    address = get_address_from_id(ctx.author.id)
+    if address == "":
+        await ctx.send("Discord user not registered with valid ethereum address")
+    else:
+        await ctx.send(embeds=list_erc721(address))
+
+
 bot.run(bot_token)
