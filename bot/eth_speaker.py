@@ -5,7 +5,7 @@ from config.config import bot_token
 from services.bot.register import register_user
 from services.bot.swap import swap_erc20_to_erc20, swap_eth_to_erc20, swap_erc20_to_eth
 from services.bot.transfer import erc721, erc20, eth, erc20_approve
-
+from services.bot.list_nfts import list_erc721
 
 description = '''This bot goes on to talk to the chain to get things done'''
 
@@ -69,5 +69,11 @@ async def help(ctx):
     embed.add_field(name='Commands', value=formatted_cmds)
 
     await ctx.send(embed=embed)
+
+
+@bot.command()
+async def list_nfts(ctx, address):
+    await ctx.send(embeds=list_erc721(address))
+
 
 bot.run(bot_token)
