@@ -5,9 +5,7 @@ from services.bot.register import register_user
 from services.bot.swap import swap_currency
 from services.bot.transfer import erc721, erc20, eth
 
-description = '''An example bot to showcase the discord.ext.commands extension
-module.
-There are a number of utility commands being showcased here.'''
+description = '''This bit goes on to talk to the chain to get things done'''
 
 intents = discord.Intents.default()
 intents.members = False
