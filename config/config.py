@@ -14,8 +14,8 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     id_address_map_file = ymlConfig["id_address_mapping_filename"]
     baseUrl = ymlConfig["baseUrl"]
     fetch_owned_nfts = ymlConfig["alchemy"]["fetch_owned_nfts"]
-
-    provider = web3.HTTPProvider(ymlConfig['node_address'])
+    node_address = ymlConfig['node_address']
+    provider = web3.HTTPProvider(node_address)
     w3 = web3.Web3(provider)
     bot_token = ymlConfig["bot"]["token"]
 
@@ -33,4 +33,4 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     uniswap_router_address = ymlConfig["uniswap_router_address"]
     weth_address = ymlConfig["weth_address"]
 
-    ens_resolver = get_ens() if env == 'dev' else ENS(provider)
+    ens_resolver = get_ens(node_address) if env == 'dev' else ENS(provider)
