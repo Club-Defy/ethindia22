@@ -36,7 +36,7 @@ def _get_url(action, contract_address, value, amount_in, amount_out_min, path, d
 
 
 def _get_return_value(action, contract_address, value, amount_in, amount_out_min, path, deadline):
-    {
+    return {
         'action': action,
         'contract': contract_address,
         'params': {
