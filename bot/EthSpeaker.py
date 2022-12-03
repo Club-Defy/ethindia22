@@ -30,8 +30,7 @@ async def register(ctx):
 
 @bot.command(description="transfers eth")
 async def transfer_eth(ctx, to_address, amount):
-    eth(to_address, amount)
-    await ctx.send("this will transfer " + amount + " eth to " + to_address)
+    await ctx.send(eth(to_address, amount))
 
 
 @bot.command()
