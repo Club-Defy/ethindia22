@@ -14,11 +14,12 @@ intents.members = False
 intents.message_content = False
 
 bot = commands.Bot(command_prefix='/', description=description, intents=intents)
-
+bot.remove_command('help')
 
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')
+    print(f'Disabling default help')
     print('------')
 
 
@@ -57,5 +58,16 @@ async def swap(ctx, from_amount, from_currency, to_currency):
 @bot.command()
 async def approve_erc20(ctx, spender, amount, token_address):
     await ctx.send(erc20_approve(spender, amount, token_address))
+
+@bot.command()
+async def help(ctx):
+    cmds = list(bot.all_commands.keys())
+    formatted_cmds = '\n'.join([str(elem) for i, elem in enumerate(cmds)])
+    embed = discord.Embed(
+        title="List of Commands",
+        colour=discord.Colour.blue())
+    embed.add_field(name='Commands', value=formatted_cmds)
+
+    await ctx.send(embed=embed)
 
 bot.run(bot_token)
