@@ -10,6 +10,7 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     health_check_response = ymlConfig["health_check_msg"]
     id_address_map_file = ymlConfig["id_address_mapping_filename"]
     baseUrl = ymlConfig["baseUrl"]
+    fetch_owned_nfts = ymlConfig["alchemy"]["fetch_owned_nfts"]
 
     w3 = web3.Web3(web3.HTTPProvider(ymlConfig['node_address']))
     bot_token = ymlConfig["bot"]["token"]

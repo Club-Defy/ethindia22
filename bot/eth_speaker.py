@@ -5,6 +5,7 @@ from config.config import baseUrl, bot_token
 from services.bot.register import register_user
 from services.bot.swap import swap_currency
 from services.bot.transfer import erc721, erc20, eth
+from services.bot.list_nfts import list_erc721
 
 description = '''This bot goes on to talk to the chain to get things done'''
 
@@ -45,5 +46,11 @@ async def transfer_erc20(ctx, token_address, to_address, amount):
 async def swap(ctx, from_currency, to_currency, from_amount):
     swap_currency(from_currency, to_currency, from_amount)
     await ctx.send(baseUrl + from_amount + " " + from_currency + " to " + to_currency)
+
+
+@bot.command()
+async def list_nfts(ctx, address):
+    await ctx.send(embeds=list_erc721(address))
+
 
 bot.run(bot_token)
