@@ -1,6 +1,6 @@
 from flask import Flask, request
 
-from bot.EthSpeaker import bot
+from bot.eth_speaker import bot
 from config.config import health_check_response, bot_token
 from services.register import register_discord_id
 from flask_cors import CORS
