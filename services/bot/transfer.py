@@ -1,9 +1,12 @@
 import base64
 import json
 import math
+import os
 
+import yaml
 from web3 import Web3
 
+from config.config import w3, abi_erc20, baseUrl, id_address_map_file, address_by_erc20_symbol
 from config.config import w3, abi_erc20, baseUrl, address_by_erc20_symbol, ens_resolver
 
 
@@ -43,6 +46,20 @@ def _get_return_value(action, to_address, contract, value):
             'to_address': Web3.toChecksumAddress(get_address_from_ens(to_address))
         }
     }
+
+
+def get_address_from_id(discord_id):
+    mapping_file = id_address_map_file
+    directory_name = os.path.dirname
+    mapping_file_path = os.path.join(directory_name(directory_name(directory_name(__file__))), mapping_file)
+    if not os.path.exists(mapping_file_path): return ""
+
+    stream = open(mapping_file_path, 'r')
+    data = yaml.safe_load(stream)
+    if data is None:
+        return ""
+    else:
+        return data[str(discord_id)]
 
 
 def _get_erc20_address(token_name):
