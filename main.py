@@ -8,7 +8,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-bot.run(bot_token)
 
 @app.route("/")
 def health_check():
