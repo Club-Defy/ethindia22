@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-from config.config import bot_token, baseUrl
+from config.config import baseUrl
 from services.bot.register import register_user
 from services.bot.swap import swap_currency
 from services.bot.transfer import erc721, erc20, eth
@@ -13,8 +13,6 @@ intents.members = False
 intents.message_content = False
 
 bot = commands.Bot(command_prefix='/', description=description, intents=intents)
-
-token = bot_token
 
 
 @bot.event
@@ -47,6 +45,3 @@ async def transfer_erc20(ctx, token_address, to_address, amount):
 async def swap(ctx, from_currency, to_currency, from_amount):
     swap_currency(from_currency, to_currency, from_amount)
     await ctx.send(baseUrl + from_amount + " " + from_currency + " to " + to_currency)
-
-
-bot.run(token)
