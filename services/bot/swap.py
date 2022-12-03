@@ -4,22 +4,27 @@ import json
 import base64
 import math
 
-from config.config import w3, abi_erc20, baseUrl, transaction_deadline_mins, uniswap_router_address, weth_address
+from config.config import w3, abi_erc20, baseUrl, transaction_deadline_mins, uniswap_router_address, weth_address, \
+    address_by_erc20_symbol
 
 
 def swap_erc20_to_erc20(from_amount, from_currency, to_currency):
+    from_currency = _get_erc20_address(from_currency)
+    to_currency = _get_erc20_address(to_currency)
     return _get_url('swap', uniswap_router_address, 0, _get_base_amount(from_amount, from_currency), 0,
                     [from_currency, to_currency], _fetch_deadline())
 
 
 def swap_eth_to_erc20(from_amount, to_currency):
+    to_currency = _get_erc20_address(to_currency)
     return _get_url('swap_eth', uniswap_router_address, _get_base_amount(from_amount, weth_address), 0, 0,
                     [weth_address, to_currency],
                     _fetch_deadline())
 
 
 def swap_erc20_to_eth(from_amount, from_currency):
-    return _get_url('swap_erc20', uniswap_router_address, 0, _get_base_amount(from_amount, weth_address), 0,
+    from_currency = _get_erc20_address(from_currency)
+    return _get_url('swap_erc20', uniswap_router_address, 0, _get_base_amount(from_amount, from_currency), 0,
                     [from_currency, weth_address],
                     _fetch_deadline())
 
@@ -51,3 +56,10 @@ def _get_return_value(action, contract_address, value, amount_in, amount_out_min
             'value': value
         }
     }
+
+
+def _get_erc20_address(token_name):
+    token = str.upper(token_name)
+    if token not in address_by_erc20_symbol:
+        return token_name
+    return address_by_erc20_symbol[token]
