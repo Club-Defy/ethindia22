@@ -17,7 +17,7 @@ def list_erc721(address):
             embed = discord.Embed(
                 title=nft["contract"]["address"],
                 url=nft["media"][0]["gateway"])\
-                .add_field(name="TokenId", value=nft["id"]["tokenId"])\
+                .add_field(name="TokenId", value=int(nft["id"]["tokenId"], 16))\
                 .set_thumbnail(url=nft["media"][0]["gateway"])
             nft_list_response.append(embed)
 
