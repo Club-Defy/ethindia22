@@ -8,21 +8,25 @@ from config.config import w3, abi_erc20, baseUrl, transaction_deadline_mins, uni
 
 
 def swap_erc20_to_erc20(from_amount, from_currency, to_currency):
-    return _get_url('swap', uniswap_router_address, 0, _get_base_amount(from_amount, from_currency), 0, [from_currency, to_currency], _fetch_deadline())
+    return _get_url('swap', uniswap_router_address, 0, _get_base_amount(from_amount, from_currency), 0,
+                    [from_currency, to_currency], _fetch_deadline())
 
 
 def swap_eth_to_erc20(from_amount, to_currency):
-    return _get_url('swap_eth', uniswap_router_address, _get_base_amount(from_amount, weth_address), 0, 0, [weth_address, to_currency],
+    return _get_url('swap_eth', uniswap_router_address, _get_base_amount(from_amount, weth_address), 0, 0,
+                    [weth_address, to_currency],
                     _fetch_deadline())
 
 
 def swap_erc20_to_eth(from_amount, from_currency):
-    return _get_url('swap_erc20', uniswap_router_address, 0, _get_base_amount(from_amount, weth_address), 0, [from_currency, weth_address],
+    return _get_url('swap_erc20', uniswap_router_address, 0, _get_base_amount(from_amount, weth_address), 0,
+                    [from_currency, weth_address],
                     _fetch_deadline())
 
+
 def _get_base_amount(amount, contract_address):
-    return int(amount) * math.pow(10, w3.eth.contract(address=Web3.toChecksumAddress(contract_address),
-                                                      abi=abi_erc20).functions.decimals().call())
+    return int(float(amount) * math.pow(10, w3.eth.contract(address=Web3.toChecksumAddress(contract_address),
+                                                            abi=abi_erc20).functions.decimals().call()))
 
 
 def _fetch_deadline():
