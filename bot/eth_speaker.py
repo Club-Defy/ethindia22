@@ -1,10 +1,11 @@
 import discord
 from discord.ext import commands
 
-from config.config import baseUrl, bot_token
+from config.config import bot_token
 from services.bot.register import register_user
-from services.bot.swap import swap_currency
-from services.bot.transfer import erc721, erc20, eth
+from services.bot.swap import swap_erc20_to_erc20, swap_eth_to_erc20, swap_erc20_to_eth
+from services.bot.transfer import erc721, erc20, eth, erc20_approve
+
 
 description = '''This bot goes on to talk to the chain to get things done'''
 
@@ -43,14 +44,18 @@ async def transfer_erc20(ctx, token_address, to_address, amount):
 
 @bot.command()
 async def swap_eth(ctx, from_amount, to_currency):
-    await ctx.send(swap_eth(from_amount, to_currency))
+    await ctx.send(swap_eth_to_erc20(from_amount, to_currency))
 
 @bot.command()
 async def swap_erc20(ctx, from_amount, from_currency):
-    await ctx.send(swap_erc20(from_amount, from_currency))
+    await ctx.send(swap_erc20_to_eth(from_amount, from_currency))
 
 @bot.command()
 async def swap(ctx, from_amount, from_currency, to_currency):
-    await ctx.send(swap(from_amount, from_currency, to_currency))
+    await ctx.send(swap_erc20_to_erc20(from_amount, from_currency, to_currency))
+
+@bot.command()
+async def approve_erc20(ctx, spender, amount, token_address):
+    await ctx.send(erc20_approve(spender, amount, token_address))
 
 bot.run(bot_token)

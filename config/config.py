@@ -18,6 +18,6 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     with open(ymlConfig["abi_path"]["erc721"], 'r') as erc721:
         abi_erc721 = json.load(erc721)
 
-    transaction_deadline_min = ymlConfig["transaction_deadline_min"]
+    transaction_deadline_mins = ymlConfig["transaction_deadline_mins"]
     uniswap_router_address = ymlConfig["uniswap_router_address"]
     weth_address = ymlConfig["weth_address"]
