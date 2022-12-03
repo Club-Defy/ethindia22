@@ -22,3 +22,8 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
         file_name = address_by_symbol.name
         with open(file_name, 'r') as address_file:
             address_by_erc20_symbol = yaml.safe_load(address_file)
+
+
+    transaction_deadline_mins = ymlConfig["transaction_deadline_mins"]
+    uniswap_router_address = ymlConfig["uniswap_router_address"]
+    weth_address = ymlConfig["weth_address"]
