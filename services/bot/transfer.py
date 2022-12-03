@@ -40,7 +40,7 @@ def _get_return_value(action, to_address, contract, value):
         'contract': Web3.toChecksumAddress(contract),
         'params': {
             'value': value,
-            'to_address': Web3.toChecksumAddress(_get_address_from_ens(to_address))
+            'to_address': Web3.toChecksumAddress(get_address_from_ens(to_address))
         }
     }
 
@@ -53,7 +53,7 @@ def _get_erc20_address(token_name):
 
 
 
-def _get_address_from_ens(address):
+def get_address_from_ens(address):
     owner = ens_resolver.owner(address)
     if owner == '0x0000000000000000000000000000000000000000':
         return address
