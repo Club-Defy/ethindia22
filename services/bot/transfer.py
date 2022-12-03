@@ -4,7 +4,7 @@ import math
 
 from web3 import Web3
 
-from server.config.config import w3, abi_erc721
+from config.config import w3
 
 
 def eth(to_address, amount):

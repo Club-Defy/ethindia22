@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
 
+from config.config import bot_token
 from services.bot.register import register_user
 from services.bot.swap import swap_currency
 from services.bot.transfer import erc721, erc20, eth
-from server.config.config import bot_token
 
 description = '''This bot goes on to talk to the chain to get things done'''
 
