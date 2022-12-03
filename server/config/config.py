@@ -1,3 +1,6 @@
+import json
+
+import web3
 import yaml
 import os
 
@@ -6,7 +9,9 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     env = ymlConfig["env"]
     health_check_response = ymlConfig["health_check_msg"]
 
+    w3 = web3.Web3(web3.HTTPProvider(ymlConfig['node_address']))
     bot_token = ymlConfig["bot"]["token"]
-    erc20_abi_path = ymlConfig["abi_path"]["erc20"]
-    erc721_abi_path = ymlConfig["abi_path"]["erc721"]
-    swap_abi_path = ymlConfig["abi_path"]["swap"]
+    with open(ymlConfig["abi_path"]["erc20"], 'r') as erc20:
+        abi_erc20 = json.load(erc20)
+    with open(ymlConfig["abi_path"]["erc721"], 'r') as erc721:
+        abi_erc721 = json.load(erc721)
