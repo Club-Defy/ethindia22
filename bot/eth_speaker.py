@@ -45,3 +45,5 @@ async def transfer_erc20(ctx, token_address, to_address, amount):
 async def swap(ctx, from_currency, to_currency, from_amount):
     swap_currency(from_currency, to_currency, from_amount)
     await ctx.send(baseUrl + from_amount + " " + from_currency + " to " + to_currency)
+
+bot.run(bot_token)
