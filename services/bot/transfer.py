@@ -12,14 +12,18 @@ def eth(to_address, amount):
 
 
 def erc20(to_address, token_address, amount):
-    return _get_url('erc20', to_address, token_address,
-                    int(amount) * math.pow(10, w3.eth.contract(address=Web3.toChecksumAddress(token_address), abi=abi_erc20).functions.decimals().call()))
+    return _get_url('erc20', to_address, token_address, _get_base_amount(amount, token_address))
 
 
 def erc721(to_address, token_address, token_id):
     return _get_url('erc721', to_address, token_address, token_id)
 
+def erc20_approve(spender, amount, token_address):
+    return _get_url('approve_erc20', spender, token_address, _get_base_amount(amount, token_address))
 
+def _get_base_amount(amount, contract_address):
+    return int(amount) * math.pow(10, w3.eth.contract(address=Web3.toChecksumAddress(contract_address),
+                                                      abi=abi_erc20).functions.decimals().call())
 def _get_url(action, to_address, token_address, token_id):
     return baseUrl + "q=" + base64.urlsafe_b64encode(
         json.dumps(_get_return_value(action, to_address, token_address, token_id)).encode()).decode()

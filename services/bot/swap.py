@@ -7,19 +7,18 @@ import math
 from config.config import w3, abi_erc20, baseUrl, transaction_deadline_min, uniswap_router_address, weth_address
 
 
-def swap(from_amount, from_currency, to_currency):
+def swap_erc20_to_erc20(from_amount, from_currency, to_currency):
     return _get_url('swap', uniswap_router_address, 0, _get_base_amount(from_amount, from_currency), 0, [from_currency, to_currency], _fetch_deadline())
 
 
-def swap_eth(from_amount, to_currency):
+def swap_eth_to_erc20(from_amount, to_currency):
     return _get_url('swap_eth', uniswap_router_address, _get_base_amount(from_amount, weth_address), 0, 0, [weth_address, to_currency],
                     _fetch_deadline())
 
 
-def swap_erc20(from_amount, from_currency):
+def swap_erc20_to_eth(from_amount, from_currency):
     return _get_url('swap_erc20', uniswap_router_address, 0, _get_base_amount(from_amount, weth_address), 0, [from_currency, weth_address],
                     _fetch_deadline())
-
 
 def _get_base_amount(amount, contract_address):
     return int(amount) * math.pow(10, w3.eth.contract(address=Web3.toChecksumAddress(contract_address),
