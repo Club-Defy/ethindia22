@@ -1,4 +1,5 @@
+from config.config import baseUrl
+
+
 def register_user(user_id):
-    #do user registration here
-    print(user_id)
-    pass
+    return baseUrl + "id=" + str(user_id)
