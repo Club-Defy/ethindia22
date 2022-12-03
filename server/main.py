@@ -1,6 +1,6 @@
 from flask import Flask
 
-from server.config.config import health_check_response
+from config.config import health_check_response
 
 app = Flask(__name__)
 
