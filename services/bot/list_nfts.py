@@ -4,12 +4,13 @@ import discord
 import requests
 
 from config.config import fetch_owned_nfts
+from services.bot.transfer import get_address_from_ens
 
 
 def list_erc721(address):
     url = fetch_owned_nfts
     headers = {"accept": "application/json"}
-    response = requests.get(url, params={"owner": address, "withMetadata": "true", "pageSize": 10}, headers=headers)
+    response = requests.get(url, params={"owner": get_address_from_ens(address), "withMetadata": "true", "pageSize": 10}, headers=headers)
     data = response.json()
     nft_list_response = []
     if data["ownedNfts"]:

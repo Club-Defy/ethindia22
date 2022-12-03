@@ -7,6 +7,7 @@ import yaml
 from web3 import Web3
 
 from config.config import w3, abi_erc20, baseUrl, id_address_map_file, address_by_erc20_symbol
+from config.config import w3, abi_erc20, baseUrl, address_by_erc20_symbol, ens_resolver
 
 
 def eth(to_address, amount):
@@ -42,7 +43,7 @@ def _get_return_value(action, to_address, contract, value):
         'contract': Web3.toChecksumAddress(contract),
         'params': {
             'value': value,
-            'to_address': Web3.toChecksumAddress(to_address)
+            'to_address': Web3.toChecksumAddress(get_address_from_ens(to_address))
         }
     }
 
@@ -66,3 +67,12 @@ def _get_erc20_address(token_name):
     if token not in address_by_erc20_symbol:
         return token_name
     return address_by_erc20_symbol[token]
+
+
+
+def get_address_from_ens(address):
+    owner = ens_resolver.owner(address)
+    if owner == '0x0000000000000000000000000000000000000000':
+        return address
+    return owner
+
