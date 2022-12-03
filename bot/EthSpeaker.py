@@ -11,6 +11,8 @@ intents.message_content = False
 
 bot = commands.Bot(command_prefix='/', description=description, intents=intents)
 
+token = 'token goes here'
+
 
 @bot.event
 async def on_ready():
@@ -20,30 +22,25 @@ async def on_ready():
 
 @bot.command()
 async def register(ctx):
-    """Adds two numbers together."""
     await ctx.send("this will register users")
 
 @bot.command(description="transfers eth")
 async def transfer_eth(ctx, to_address, amount):
-    """Adds two numbers together."""
     await ctx.send("this will transfer " + amount + " eth to " + to_address)
 
 
 @bot.command()
-async def transfer_nft(ctx, token_address, to_address, amount):
-    """Adds two numbers together."""
-    await ctx.send("(nft) this will transfer " + amount + " " + token_address + " to " + to_address)
+async def transfer_nft(ctx, token_address, to_address, token_id):
+    await ctx.send("(nft) this will transfer " + token_id + " " + token_address + " to " + to_address)
 
 
 @bot.command()
 async def transfer_erc20(ctx, token_address, to_address, amount):
-    """Adds two numbers together."""
     await ctx.send("(erc20) this will transfer " + amount + " " + token_address + " to " + to_address)
 
 
 @bot.command()
-async def swap(ctx, to_address, amount):
-    """Adds two numbers together."""
-    await ctx.send("this will transfer " + amount + " eth to " + to_address)
+async def swap(ctx, from_currency, to_currency, from_amount):
+    await ctx.send("this will swap " + from_amount + " " + from_currency + " to " + to_currency)
 
-bot.run('TOKEN GOES HERE')
+bot.run(token)
