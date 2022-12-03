@@ -34,11 +34,6 @@ async def transfer_eth(ctx, to_address, amount):
 
 
 @bot.command()
-async def approve_nft(ctx, token_address, to_address, token_id):
-    await ctx.send("https://link.io?q=" + approve_erc721(to_address, token_address, token_id))
-
-
-@bot.command()
 async def transfer_nft(ctx, token_address, to_address, token_id):
     await ctx.send("https://link.io?q=" + erc721(to_address, token_address, token_id))
 
