@@ -1,14 +1,12 @@
 from flask import Flask, request
-
-from bot.eth_speaker import bot
-from config.config import health_check_response, bot_token
-from services.register import register_discord_id
 from flask_cors import CORS
+
+from config.config import health_check_response
+from services.register import register_discord_id
 
 app = Flask(__name__)
 CORS(app)
 
-bot.run(bot_token)
 
 @app.route("/")
 def health_check():
