@@ -1,8 +1,10 @@
 import os
-
 import yaml
 from pathlib import Path
 import config.config
+from threading import Lock
+
+lock = Lock()
 
 
 def register_discord_id(address, discord_id):
@@ -19,5 +21,6 @@ def register_discord_id(address, discord_id):
     else:
         data[discord_id] = address
 
-    with open(mapping_file, 'w') as yaml_file:
-        yaml_file.write(yaml.dump(data))
+    with lock:
+        with open(mapping_file, 'w') as yaml_file:
+            yaml_file.write(yaml.dump(data))
