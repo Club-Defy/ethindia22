@@ -58,7 +58,7 @@ def get_address_from_id(discord_id):
     if data is None:
         return ""
     else:
-        return data[discord_id]
+        return data[str(discord_id)]
 
 
 def _get_erc20_address(token_name):
