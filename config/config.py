@@ -1,8 +1,11 @@
 import json
+import os
 
 import web3
 import yaml
-import os
+from ens import ENS
+
+from config.for_ens import get_ens
 
 with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     ymlConfig = yaml.safe_load(file)
@@ -11,7 +14,8 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     id_address_map_file = ymlConfig["id_address_mapping_filename"]
     baseUrl = ymlConfig["baseUrl"]
 
-    w3 = web3.Web3(web3.HTTPProvider(ymlConfig['node_address']))
+    provider = web3.HTTPProvider(ymlConfig['node_address'])
+    w3 = web3.Web3(provider)
     bot_token = ymlConfig["bot"]["token"]
 
     with open(ymlConfig["abi_path"]["erc20"], 'r') as erc20:
@@ -27,3 +31,5 @@ with open(os.path.join(os.path.dirname(__file__), 'config.yml'), 'r') as file:
     transaction_deadline_mins = ymlConfig["transaction_deadline_mins"]
     uniswap_router_address = ymlConfig["uniswap_router_address"]
     weth_address = ymlConfig["weth_address"]
+
+    ens_resolver = get_ens() if env == 'dev' else ENS(provider)
