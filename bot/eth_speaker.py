@@ -30,12 +30,12 @@ async def register(ctx):
 
 
 @bot.command()
-async def transfer_eth(ctx, to_address, amount):
+async def transfer_eth(ctx, amount, to_address):
     await ctx.send(eth(to_address, amount))
 
 
 @bot.command()
-async def transfer_eth_discord(ctx, member: discord.User, amount):
+async def transfer_eth_discord(ctx, amount, member: discord.User):
     to_address = get_address_from_id(member.id)
     if to_address == "":
         await ctx.send("Discord user not registered with valid ethereum address")
@@ -44,12 +44,12 @@ async def transfer_eth_discord(ctx, member: discord.User, amount):
 
 
 @bot.command()
-async def transfer_nft(ctx, token_address, to_address, token_id):
+async def transfer_nft(ctx, token_address, token_id, to_address):
     await ctx.send(erc721(to_address, token_address, token_id))
 
 
 @bot.command()
-async def transfer_nft_discord(ctx, token_address, member: discord.User, token_id):
+async def transfer_nft_discord(ctx, token_address, token_id, member: discord.User):
     to_address = get_address_from_id(member.id)
     if to_address == "":
         await ctx.send("Discord user not registered with valid ethereum address")
@@ -58,12 +58,12 @@ async def transfer_nft_discord(ctx, token_address, member: discord.User, token_i
 
 
 @bot.command()
-async def transfer_erc20(ctx, token_address, to_address, amount):
+async def transfer_erc20(ctx, amount, token_address, to_address):
     await ctx.send(erc20(to_address, token_address, amount))
 
 
 @bot.command()
-async def transfer_erc20_discord(ctx, token_address, member: discord.User, amount):
+async def transfer_erc20_discord(ctx, amount, token_address, member: discord.User):
     to_address = get_address_from_id(member.id)
     if to_address == "":
         await ctx.send("Discord user not registered with valid ethereum address")

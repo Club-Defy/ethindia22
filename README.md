@@ -5,18 +5,18 @@ Available commands
 - register
 
 
-- transfer_eth to amount
-    - /transfer_eth 0x1f3a5D22baEeBaC7B428a67331bdd4bC6F22972E 0.01
+- transfer_eth amount to
+    - /transfer_eth 0.01 0x1f3a5D22baEeBaC7B428a67331bdd4bC6F22972E
 
 
 - list_my_nfts
   
-- transfer_nft token to_address token_id
-    - /transfer_nft 0x39ec448b891c476e166b3c3242a90830db556661 debtlessmango.eth 2299
+- transfer_nft token token_id to_address
+    - /transfer_nft 0x39ec448b891c476e166b3c3242a90830db556661 2299 debtlessmango.eth
 
   
-- transfer_erc20 token to_address amount
-    - /transfer_erc20 LINK debtlessmango.eth 0.5
+- transfer_erc20 amount token to_address
+    - /transfer_erc20 0.5 LINK debtlessmango.eth
 
   
 - swap_eth amount to
