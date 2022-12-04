@@ -1,4 +1,4 @@
-You can find the discord bot to talk to at [TO_ADD_URL_HERE]
+You can find the [Discord Bazaar BOT](https://discord.com/api/oauth2/authorize?client_id=853881646688108553&permissions=2112&scope=bot) and add it to your server and get talking straight away!
 
 Available commands
 
